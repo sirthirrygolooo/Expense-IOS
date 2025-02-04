@@ -16,6 +16,7 @@ struct RowView: View {
             Text(expense.title)
             Spacer()
             Text(expense.label)
+            
         }
         .font(.title2)
         .padding(.vertical, 10)

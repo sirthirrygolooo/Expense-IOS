@@ -1,25 +1,31 @@
-//
-//  AddExpenseView.swift
-//  Expense
-//
-//  Created by froehly jean-baptiste on 28/01/2025.
-//
-
 import SwiftUI
 
-struct AddExpenseView: View {
+struct AddExepenseView: View {
+    
+    @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var expenseVM: ExpenseViewModel
+    
     @State private var expenseTitle: String = ""
-    @State 
+    @State private var expenseValue: Int = 0
+    @State private var label: Label = .perso
     
     var body: some View {
         VStack {
-            TextField("Enter your task", text: $todoTitle)
+            TextField("Add an expense", text: $expenseTitle)
                 .padding(.horizontal)
                 .frame(height: 55)
                 .background(Color(.systemGray4))
                 .cornerRadius(10)
             
+            Picker("Label", selection: $label){
+                ForEach(Label.allCases, id: \.self) { label in
+                    Text(label.rawValue)}
+            }
+            .pickerStyle(SegmentedPickerStyle())
+            
             Button {
+                self.todoVM.addTodo(todo: Todo(title: todoTitle, isCompleted: false, priotity: priority))
+                self.presentationMode.wrappedValue.dismiss()
                 
             } label: {
                 Text("SAVE")
@@ -36,8 +42,12 @@ struct AddExpenseView: View {
         .padding(14)
         .navigationTitle("Add a todo")
     }
+    
 }
 
 #Preview {
-    AddExpenseView()
+    NavigationView {
+        AddTodoView()
+            .environmentObject(TodoViewModel())
+    }
 }

@@ -9,10 +9,22 @@ import SwiftUI
 
 struct MainView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        TabView {
+            ListView()
+                .tabItem {
+                    Image(systemName: "dollarsign.square")
+                    Text("Expenses")
+                }
+            AddTodoView()
+                .tabItem {
+                    Image(systemName: "dollarsign.square")
+                    Text("Add")
+                }
+        }
     }
 }
 
 #Preview {
     MainView()
+        .environmentObject(TodoViewModel())
 }
