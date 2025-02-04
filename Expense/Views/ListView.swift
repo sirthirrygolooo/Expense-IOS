@@ -9,14 +9,16 @@ import SwiftUI
 
 struct ListView: View {
     
-    var data: [Expense]
+    @EnvironmentObject var expenseVM: ExpenseViewModel
     
     var body: some View {
         NavigationView {
             List {
-                ForEach(data) {expense in
-                    Text(expense.title)
+                ForEach(expenseVM.expenses) {expense in
+                    RowView(expense: expense)
                 }
+                .onDelete(perform: expenseVM.deleteExpense)
+                .onMove(perform: expenseVM.moveExpense)
             }
             .listStyle(PlainListStyle())
             .navigationTitle("Hehe")
@@ -25,13 +27,16 @@ struct ListView: View {
                     EditButton()
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink("Add", destination: EmptyView())
+                    NavigationLink("Add", destination: AddExepenseView())
                 }
             }
         }
     }
 }
 
+
+
 #Preview {
-    ListView(data: Expense.testData)
+    ListView()
+        .environmentObject(ExpenseViewModel())
 }

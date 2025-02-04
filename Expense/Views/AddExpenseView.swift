@@ -24,7 +24,7 @@ struct AddExepenseView: View {
             .pickerStyle(SegmentedPickerStyle())
             
             Button {
-                self.todoVM.addTodo(todo: Todo(title: todoTitle, isCompleted: false, priotity: priority))
+                self.expenseVM.addExpense(expense: Expense(title: expenseTitle, value: expenseValue, label: label))
                 self.presentationMode.wrappedValue.dismiss()
                 
             } label: {
@@ -47,7 +47,7 @@ struct AddExepenseView: View {
 
 #Preview {
     NavigationView {
-        AddTodoView()
-            .environmentObject(TodoViewModel())
+        AddExepenseView()
+            .environmentObject(ExpenseViewModel())
     }
 }

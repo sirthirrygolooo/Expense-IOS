@@ -15,7 +15,7 @@ struct RowView: View {
         HStack {
             Text(expense.title)
             Spacer()
-            Text(expense.label)
+            Text(expense.value)
             
         }
         .font(.title2)
